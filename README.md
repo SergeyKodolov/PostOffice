@@ -11,3 +11,5 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe ***ПутьДоФ�
 
 и удаление:  
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe -u ***ПутьДоФайла***\PostOfficeService.exe  
+
+В файле ***PostOfficeDataBase/App.config*** необходимо изменить путь к БД
