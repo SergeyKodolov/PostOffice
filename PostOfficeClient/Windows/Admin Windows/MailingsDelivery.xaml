@@ -1,0 +1,49 @@
+﻿<Window x:Class="PostOfficeClient.Windows.Admin_Windows.MailingsDelivery"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficeClient.Windows.Admin_Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Выдача РПО" Height="401.695" Width="471.841" MaxHeight="401.695" MaxWidth="530.508" MinHeight="401.695" MinWidth="471.841">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="mailingsList" Height="30" FontSize="15"  Margin="7 5" SelectionChanged="MailingsList_SelectionChanged"/>
+            <Button Grid.Column="1" Content="Выдать РПО" FontSize="15" Height="30" Margin="7 5" Click="DeliveryMailing_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <GroupBox Header="Информация о РПО" Margin="7 0" >
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Тип РПО" FontSize="15" Margin="7 5 7 0"/>
+                        <TextBox x:Name="mailingType" Height="30" FontSize="15" IsReadOnly="True" Margin="7 0" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Адрес получателя" FontSize="15" Margin="7 5 7 0"/>
+                        <TextBox x:Name="address" Height="30" FontSize="15" IsReadOnly="True" Margin="7 0" HorizontalAlignment="Left"/>
+                        <TextBlock Text="E-Mail получателя" FontSize="15" Margin="7 5 7 0"/>
+                        <TextBox x:Name="email" Height="30" FontSize="15" IsReadOnly="True" Margin="7 0" HorizontalAlignment="Left"/>                        
+                    </StackPanel>                   
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <GroupBox Header="Информация о пользователе" Margin="7 0">
+                <StackPanel>
+                    <TextBlock Text="Имя" FontSize="15" Margin="7 5 7 0"/>
+                    <TextBox x:Name="firstName" Height="30" FontSize="15" IsReadOnly="True" Margin="7 0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Фамилия" FontSize="15" Margin="7 5 7 0"/>
+                    <TextBox x:Name="lastName" Height="30" FontSize="15" IsReadOnly="True" Margin="7 0" HorizontalAlignment="Left"/>                    
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

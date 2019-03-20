@@ -1,0 +1,34 @@
+﻿<Window x:Class="PostOfficeClient.User"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Отслеживание" WindowStartupLocation="CenterScreen"
+        Height="207.364" Width="472.052" 
+        MinHeight="207.364" MinWidth="348.052">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>         
+        <xctk:MaskedTextBox x:Name="trackingNumber" Height="50" Width="320" Mask="000000 00 00000 0" TextAlignment="Center"
+                            FontSize="35" VerticalAlignment="Bottom" Margin="10" MaxLength="14"/>
+        <TextBlock IsHitTestVisible="False" Text="Введите трэк-номер" VerticalAlignment="Bottom" FontSize="25" 
+                   HorizontalAlignment="Center" Foreground="DarkGray" Margin="18">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=trackingNumber}" Value="______ __ _____ _">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Button Grid.Row="1" Height="40" Width="200" Content="Отследить" FontSize="25" Margin="10" VerticalAlignment="Top" 
+                Background="#7E7AB7" Click="Tracking_Click" IsDefault="True"/>
+    </Grid>
+</Window>

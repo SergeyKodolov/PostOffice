@@ -1,0 +1,131 @@
+﻿<Window x:Class="PostOfficeClient.Windows.Admin_Windows.Search"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficeClient.Windows.Admin_Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Поиск" Height="450" Width="1100">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Пользователи">
+                <StackPanel>
+                    <DataGrid x:Name="usersTable" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="UsersTable_SelectionChanged" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="E-Mail"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [2]}" Header="Имя"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Отчество"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [4]}" Header="Фамилия"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [5]}" Header="Адрес"/>
+                            <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [6]}" Header="Админ?"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Header="РПО для выбранного пользователя">
+                        <DataGrid x:Name="mailingsToUser" IsReadOnly="True" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [1]}" Header="Тип РПО"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                                <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [4]}" Header="Доставлено?"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [5]}" Header="E-Mail отправителя"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                    <GroupBox Header="РПО от выбранного пользователя">
+                        <DataGrid x:Name="mailingsFromUser" IsReadOnly="True" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [1]}" Header="Тип РПО"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                                <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [4]}" Header="Доставлено?"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [6]}" Header="E-Mail получателя"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>                    
+                </StackPanel>                
+            </TabItem>
+            <TabItem Header="РПО">
+                <StackPanel>
+                    <DataGrid x:Name="mailingsTable" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="MailingsTable_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [1]}" Header="Тип РПО"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                            <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [4]}" Header="Доставлено?"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [5]}" Header="E-Mail отправителя"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding [6]}" Header="E-Mail получателя"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Header="Отслеживание выбранного РПО">
+                        <DataGrid x:Name="trackOfMailing" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="TrackOfMailing_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [1]}" Header="Индекс отделения"/>
+                                <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [2]}" Header="Покинуло отделение?"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3], StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" Header="Дата и время регистрации"/>                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                    <GroupBox Header="Отделение по выбранному индексу">
+                        <DataGrid x:Name="office" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Индекс"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [1]}" Header="Адрес"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [2]}" Header="Телефон"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Расписание работы"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>            
+            <TabItem Header="Отслеживание">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker x:Name="selectedDate" HorizontalAlignment="Left" SelectedDateChanged="Selection_SelecteChanged" Margin="7"/>
+                        <ComboBox Grid.Column="1" x:Name="selectedOffice" Margin="7" SelectionChanged="Selection_SelecteChanged" KeyDown="SelectedOffice_KeyDown"/>
+                    </Grid>                    
+                    <GroupBox Header="РПО по выбранной дате">
+                        <DataGrid x:Name="trackInSelectedDate" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="TrackOfMailing_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер РПО"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding [1]}" Header="Индекс отделения"/>
+                                <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [2]}" Header="Покинуло отделение?"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3], StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" Header="Дата и время регистрации"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </StackPanel>
+                
+            </TabItem>
+            <TabItem Header="Отделения связи">
+                <StackPanel>
+                    <DataGrid x:Name="officesTable" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="OfficesTable_SelectionChanged" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Индекс"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding [1]}" Header="Адрес"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding [2]}" Header="Телефон"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding [3]}" Header="Расписание работы"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Header="РПО в выбранном отделении">
+                        <DataGrid x:Name="mailingsInOffice" IsReadOnly="True" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [1]}" Header="Тип РПО"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                                <DataGridCheckBoxColumn Width="Auto" Binding="{Binding [4]}" Header="Доставлено?"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [5]}" Header="E-Mail отправителя"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding [6]}" Header="E-Mail получателя"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>                    
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

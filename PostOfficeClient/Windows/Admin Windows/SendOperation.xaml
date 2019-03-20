@@ -1,0 +1,55 @@
+﻿<Window x:Class="PostOfficeClient.Windows.Admin_Windows.SendOperation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficeClient.Windows.Admin_Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Обработка исходящих РПО"
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <xctk:CheckComboBox x:Name="mailingsList" Height="30" Margin="7 5" ItemSelectionChanged="MailingsList_ItemSelectionChanged" />
+            <Button Grid.Column="1" Content="Отправить отмеченные РПО" FontSize="15" Height="30" Margin="7,5,7,0" Click="SendChecked_Click" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <GroupBox Header="Отправляемые РПО" Margin="7 0">
+                <DataGrid x:Name="selectedMailings" Margin="3" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding [1]}" Header="Тип РПО"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [2]}" Header="Индекс получателя"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                        <DataGridCheckBoxColumn Width="*" Binding="{Binding [4]}" Header="РПО доставлено?"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [5]}" Header="E-Mail получателя"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [6]}" Header="E-Mail отправителя"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Expander Header="РПО, находящиеся в отделении" IsExpanded="True">
+                <DataGrid x:Name="mailingsInOffice" Margin="3" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding [0]}" Header="Трек-номер"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [1]}" Header="Тип РПО"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [2]}" Header="Индекс получателя"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [3]}" Header="Адрес получателя"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [5]}" Header="E-Mail получателя"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding [6]}" Header="E-Mail отправителя"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Expander>
+        </Grid>
+    </Grid>
+</Window>
