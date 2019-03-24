@@ -1,5 +1,4 @@
 ﻿using suggestionscsharp;
-using System;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -17,14 +16,14 @@ namespace PostOfficeClient
         static string token;
         static string url;
 
-        public static SuggestClient api { get; set; }
+        public static SuggestClient Api { get; private set; }
 
         static DataProcessing()
         {
             var data = File.ReadAllLines(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))) + @"\data.txt", Encoding.Default);
             token = data[3];
             url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs";
-            api = new SuggestClient(token, url);            
+            Api = new SuggestClient(token, url);            
         }
 
         /// <summary>

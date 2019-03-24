@@ -138,7 +138,7 @@ namespace PostOfficeClient
         {
             if (e.Key == Key.Enter)
             {
-                var response = DataProcessing.api.QueryAddress(address.Text);
+                var response = DataProcessing.Api.QueryAddress(address.Text);                
                 address.ItemsSource = response.suggestions;
                 address.IsDropDownOpen = true;
             }                

@@ -10,13 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB Tables Creation Scripts", "DB Tables Creation Scripts", "{3E2EA1E8-E3FB-45FD-A39A-A4E7FCAF8AF5}"
 	ProjectSection(SolutionItems) = preProject
 		CreateTables.sql = CreateTables.sql
-		CreateTablesWithData.txt = CreateTablesWithData.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5832872-02A4-49F8-829D-80CE0D5747BA}"
 	ProjectSection(SolutionItems) = preProject
 		data.txt = data.txt
-		myData.txt = myData.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostOfficeService", "PostOfficeService\PostOfficeService.csproj", "{2F952120-B321-4F0D-AD2F-FA3DA17F7113}"

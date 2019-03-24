@@ -55,29 +55,18 @@ namespace PostOfficeClient.Tables_Providers
 
         public IEnumerable GetMailingsInOfficeList(TrackingProvider tracking, int index)
         {
-            List<string> mailingsList = new List<string>();
-
-            if (Table != null)
-            {
-                foreach (DataRow mailing in Table.Rows)
-                {
-                    if ((bool)mailing["Delivered"])
-                        continue;
-
-                    if (DataProcessing.isMailingInOffice(mailing["TrackingNumber"].ToString(), tracking.Table.Rows, index))
-                    {
-                        mailingsList.Add(mailing["TrackingNumber"].ToString());
-                    }
-                }
-            }
-
-            return mailingsList;
+            return GetMailingsListProcess(tracking, index, true);
         }
 
         public IEnumerable GetMailingsNotInOfficeList(TrackingProvider tracking, int index)
         {
-            List<string> mailingsList = new List<string>();
+            return GetMailingsListProcess(tracking, index, false);
+        }
 
+        private IEnumerable GetMailingsListProcess(TrackingProvider tracking, int index, bool flag)
+        {
+            List<string> mailingsList = new List<string>();
+            
             if (Table != null)
             {
                 foreach (DataRow mailing in Table.Rows)
@@ -85,15 +74,15 @@ namespace PostOfficeClient.Tables_Providers
                     if ((bool)mailing["Delivered"])
                         continue;
 
-                    if (!DataProcessing.isMailingInOffice(mailing["TrackingNumber"].ToString(), tracking.Table.Rows, index))
+                    if (!flag ^ DataProcessing.isMailingInOffice(mailing["TrackingNumber"].ToString(), tracking.Table.Rows, index))
                     {
                         mailingsList.Add(mailing["TrackingNumber"].ToString());
-                    }
+                    }                    
                 }
             }
 
             return mailingsList;
-        }
+        }        
 
         public List<DataRow> GetMailingsInOffice(TrackingProvider tracking, int index)
         {
